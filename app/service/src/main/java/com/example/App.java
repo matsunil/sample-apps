@@ -4,13 +4,11 @@ public class App {
 
     private String appId;
     private String name;
-    private String species;
-    private Integer age;
+    private String execution;
+    private String type;
     private String description;
-    private String goodevil;
-    private String lawchaos;
-    private String thumbImageUri;
-    private String profileImageUri;
+    private String paradigm;
+    private String generics;
 
     public App() {
     }
@@ -31,20 +29,20 @@ public class App {
         this.name = name;
     }
 
-    public String getSpecies() {
-        return species;
+    public String getExecution() {
+        return execution;
     }
 
-    public void setSpecies(String species) {
-        this.species = species;
+    public void setExecution(String execution) {
+        this.execution = execution;
     }
 
-    public Integer getAge() {
-        return age;
+    public String getType() {
+        return type;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getDescription() {
@@ -55,35 +53,19 @@ public class App {
         this.description = description;
     }
 
-    public String getGoodevil() {
-        return goodevil;
+    public String getParadigm() {
+        return paradigm;
     }
 
-    public void setGoodevil(String goodevil) {
-        this.goodevil = goodevil;
+    public void setParadigm(String paradigm) {
+        this.paradigm = paradigm;
     }
 
-    public String getLawchaos() {
-        return lawchaos;
+    public String getGenerics() {
+        return generics;
     }
 
-    public void setLawchaos(String lawchaos) {
-        this.lawchaos = lawchaos;
-    }
-
-    public String getThumbImageUri() {
-        return thumbImageUri;
-    }
-
-    public void setThumbImageUri(String thumbImageUri) {
-        this.thumbImageUri = thumbImageUri;
-    }
-
-    public String getProfileImageUri() {
-        return profileImageUri;
-    }
-
-    public void setProfileImageUri(String profileImageUri) {
-        this.profileImageUri = profileImageUri;
+    public void setGenerics(String generics) {
+        this.generics = generics;
     }
 }

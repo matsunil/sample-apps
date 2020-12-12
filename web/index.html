@@ -57,13 +57,13 @@
               </p>
               <p>
                 <br>
-                <b>Species:</b> {{app.species}}
+                <b>Execution:</b> {{app.execution}}
                 <br>
-                <b>Age:</b> {{app.age}}
+                <b>Type:</b> {{app.type}}
                 <br>
-                <b>Good/Evil:</b> {{app.goodevil}}
+                <b>Pardigm:</b> {{app.paradigm}}
                 <br>
-                <b>Lawful/Chaotic:</b> {{app.lawchaos}}
+                <b>Generics:</b> {{app.generics}}
               </p>
           </div>
         </div>
@@ -96,19 +96,20 @@
        {
          "categories": [
            {
-             "title": "Good/Evil",
+             "title": "Paradigm",
              "selections":  [
-               "Good",
-               "Neutral",
-               "Evil"
+               "OOP",
+               "functional",
+               "both"
              ]
            },
            {
-             "title": "Lawful/Chaotic",
+             "title": "Generics",
              "selections":  [
-               "Lawful",
-               "Neutral",
-               "Chaotic"
+               "compile-time",
+               "type-erasure",
+               "run-time",
+               "NA"
              ]
            }
          ]
@@ -128,10 +129,10 @@
        $scope.queryApps = function(filterCategory, filterValue) {
 
            var filterCategoryQS = "";
-           if (filterCategory==="Good/Evil") {
-             filterCategoryQS = "GoodEvil";
+           if (filterCategory==="Paradigm") {
+             filterCategoryQS = "Paradigm";
            } else {
-             filterCategoryQS = "LawChaos"
+             filterCategoryQS = "Generics"
            }
            var appsApi = appsApiEndpoint + '/apps?' + 'filter=' + filterCategoryQS + "&value=" + filterValue;
 
