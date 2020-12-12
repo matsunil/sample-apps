@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!--
+    The next iteration of our Sample Apps website. Updates include
+    dynamically pulling the apps from our backend service via the network
+    load balancer DNS name. There is also additional functionality for filtering
+    apps that we have yet to implement on the backend service.  You will see
+    the buttons available on the webpage, but because that functionality isn't
+    implemented on the backend, it does not yet work.  You will implement it during
+    module 3!
+  -->
+  <head>
+    <title>Sample Apps</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+  </head>
+  <body ng-app="appsApp">
+    <style>
+      @media (max-width: 800px) {
+      	img {
+          max-width: 300px;
+      	}
+      }
+    </style>
+    <br>
+    <div class="container" ng-controller="appsFilterController">
+      <div id="filterMenu">
+        <ul class="nav nav-pills">
+          &nbsp;
+          <li class="nav-item dropdown" ng-repeat="filterCategory in filterOptionsList.categories">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#!" role="button" aria-haspopup="true" aria-expanded="false">{{filterCategory.title}}</a>
+            <div class="dropdown-menu" >
+              <button class="dropdown-item" ng-repeat="filterCategorySelection in filterCategory.selections" ng-click="queryApps(filterCategory.title, filterCategorySelection)">{{filterCategorySelection}}</button>
+            </div>
+          </li>
+          &nbsp;
+          <li class="nav-item " >
+            <button type="button" class="btn btn-success" ng-click="removeFilter()">View All</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <br>
+    <div class="container">
+      <div id="appsGrid" class="row" ng-controller="appsListController">
+          <div class="col-md-4 border border-warning" ng-repeat="app in apps">
+              <br>
+              <p align="center">
+                <strong> {{ap.name}}</strong>
+                <br>
+                <img src="{{app.thumbImageUri}}" alt="{{app.Name}}">
+              </p>
+              <p>
+                <br>
+                <b>Species:</b> {{app.species}}
+                <br>
+                <b>Age:</b> {{app.age}}
+                <br>
+                <b>Good/Evil:</b> {{app.goodevil}}
+                <br>
+                <b>Lawful/Chaotic:</b> {{app.lawchaos}}
+              </p>
+          </div>
+        </div>
+      </div>
+    <p>
+      <br>
+      <br>
+      &nbsp;&nbsp;This site was created for use in the AWS Modern Application Workshop. <a href="https://github.com/aws-samples/aws-modern-application-workshop">Please see details here.</a>
+    </p>
+  </body>
+  <script>
+
+    var appsApiEndpoint = 'REPLACE_ME'; // example: 'http://sampl-publi-abcd12345-01234567890123.elb.us-east-1.amazonaws.com'
+
+    var app = angular.module('appsApp', []);
+
+    var gridScope;
+
+    var filterScope;
+
+    app.controller('clearFilterController', function($scope) {
+    });
+
+    app.controller('appsFilterController', function($scope) {
+
+      filterScope = $scope;
+
+      // The possible options for apps to populate the dropdown filters.
+      $scope.filterOptionsList =
+       {
+         "categories": [
+           {
+             "title": "Good/Evil",
+             "selections":  [
+               "Good",
+               "Neutral",
+               "Evil"
+             ]
+           },
+           {
+             "title": "Lawful/Chaotic",
+             "selections":  [
+               "Lawful",
+               "Neutral",
+               "Chaotic"
+             ]
+           }
+         ]
+       };
+
+       /*
+          The View All button has been selected, retrieve all the apps.
+      */
+       $scope.removeFilter = function() {
+         allApps = getAllApps(applyGridScope);
+       }
+
+       /*
+         This API hasn't been implemented on the service backend yet. You will
+         implement it during module 3!
+       */
+       $scope.queryApps = function(filterCategory, filterValue) {
+
+           var filterCategoryQS = "";
+           if (filterCategory==="Good/Evil") {
+             filterCategoryQS = "GoodEvil";
+           } else {
+             filterCategoryQS = "LawChaos"
+           }
+           var appsApi = appsApiEndpoint + '/apps?' + 'filter=' + filterCategoryQS + "&value=" + filterValue;
+
+           $.ajax({
+             url : appsApi,
+             type : 'GET',
+             success : function(response) {
+               applyGridScope(response.apps)
+             },
+             error : function(response) {
+               console.log("could not retrieve apps list.");
+               console.log(response.message);
+             }
+           });
+       }
+
+
+
+    });
+
+    /*
+      Populate the main app grid on page load.
+    */
+    app.controller('appsListController', function($scope) {
+
+      gridScope = $scope;
+
+      getAllApps(applyGridScope);
+
+    });
+
+    /*
+      Reload the grid of apps whenever a new list is retrieved based
+      on the filters selected.
+    */
+    function applyGridScope(appsList) {
+      gridScope.apps = appsList;
+      gridScope.$apply();
+    }
+
+    /*
+      Retrieve the full list of apps from the backend service API.
+    */
+    function getAllApps(callback) {
+
+      var appsApi = appsApiEndpoint + '/apps';
+
+      $.ajax({
+        url : appsApi,
+        type : 'GET',
+        success : function(response) {
+          callback(response.apps);
+        },
+        error : function(response) {
+          console.log("could not retrieve apps list.");
+          console.log(response.message);
+        }
+      });
+    }
+
+
+  </script>
+</html>

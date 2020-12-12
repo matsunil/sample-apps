@@ -1,0 +1,91 @@
+{
+  "pipeline": {
+      "name": "SampleAppsServiceCICDPipeline",
+      "roleArn": "REPLACE_ME_CODEPIPELINE_ROLE_ARN",
+      "stages": [
+        {
+          "name": "Source",
+          "actions": [
+            {
+              "inputArtifacts": [
+    
+              ],
+              "name": "Source",
+              "actionTypeId": {
+                "category": "Source",
+                "owner": "AWS",
+                "version": "1",
+                "provider": "CodeCommit"
+              },
+              "outputArtifacts": [
+                {
+                  "name": "SampleAppsService-SourceArtifact"
+                }
+              ],
+              "configuration": {
+                "BranchName": "master",
+                "RepositoryName": "SampleAppsService-Repository"
+              },
+              "runOrder": 1
+            }
+          ]
+        },
+        {
+          "name": "Build",
+          "actions": [
+            {
+              "name": "Build",
+              "actionTypeId": {
+                "category": "Build",
+                "owner": "AWS",
+                "version": "1",
+                "provider": "CodeBuild"
+              },
+              "outputArtifacts": [
+                {
+                  "name": "SampleAppsService-BuildArtifact"
+                }
+              ],
+              "inputArtifacts": [
+                {
+                  "name": "SampleAppsService-SourceArtifact"
+                }
+              ],
+              "configuration": {
+                "ProjectName": "SampleAppsServiceCodeBuildProject"
+              },
+              "runOrder": 1
+            }
+          ]
+        },
+        {
+          "name": "Deploy",
+          "actions": [
+            {
+              "name": "Deploy",
+              "actionTypeId": {
+                "category": "Deploy",
+                "owner": "AWS",
+                "version": "1",
+                "provider": "ECS"
+              },
+              "inputArtifacts": [
+                {
+                  "name": "SampleAppsService-BuildArtifact"
+                }
+              ],
+              "configuration": {
+                "ClusterName": "SampleApps-Cluster",
+                "ServiceName": "SampleApps-Service",
+                "FileName": "imagedefinitions.json"
+              }
+            }
+          ]
+        }
+      ],
+      "artifactStore": {
+        "type": "S3",
+        "location": "REPLACE_ME_ARTIFACTS_BUCKET_NAME"
+      }
+  }
+}
