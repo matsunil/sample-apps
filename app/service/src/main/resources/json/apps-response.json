@@ -1,7 +1,7 @@
 {
   "apps": [
     {
-      "appId": "4e53920c-505a-4a90-a694-b9300791f0ae",
+      "appId": "54b357ed-5028-4c2e-9255-26f027f9e3ef",
       "name": "Cplusplus",
       "execution": "compiled",
       "type": "static",
@@ -10,7 +10,7 @@
       "generics": "compile-time"
     },
     {
-      "appId": "2b473002-36f8-4b87-954e-9a377e0ccbec",
+      "appId": "b980281b-48f5-4283-bc2b-aa42c14b095a",
       "name": "Java",
       "execution": "JIT-compiled",
       "type": "static",
@@ -19,7 +19,7 @@
       "generics": "type-erasure"
     },
     {
-      "appId": "0e37d916-f960-4772-a25a-01b762b5c1bd",
+      "appId": "aaba6165-0476-4e82-81d9-83f3d078946a",
       "name": "Csharp",
       "execution": "JIT-compiled",
       "type": "static",
@@ -28,7 +28,7 @@
       "generics": "runtime"
     },
     {
-      "appId": "da5303ae-5aba-495c-b5d6-eb5c4a66b941",
+      "appId": "3323d738-bb6e-4646-a13e-9456975e0c11",
       "name": "Fsharp",
       "execution": "JIT-compiled",
       "type": "static",
@@ -37,7 +37,7 @@
       "generics": "runtime"
     },
     {
-      "appId": "b41ff031-141e-4a8d-bb56-158a22bea0b3",
+      "appId": "588ab3d0-b36e-4c03-ada8-4b1c6c456766",
       "name": "Python",
       "execution": "interpreted",
       "type": "dynamic",
@@ -46,7 +46,7 @@
       "generics": "NA"
     },
     {
-      "appId": "3f0f196c-4a7b-43af-9e29-6522a715342d",
+      "appId": "1e8a784b-2da0-4528-acb2-2f45dda3d2aa",
       "name": "Cython",
       "execution": "hybrid",
       "type": "hybrid",
