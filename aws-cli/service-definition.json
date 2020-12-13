@@ -11,11 +11,11 @@
     "awsvpcConfiguration": {
       "assignPublicIp": "DISABLED",
       "securityGroups": [
-        "REPLACE_ME_SECURITY_GROUP_ID"
+        "sg-067e3bc2bf525197d"
       ],
       "subnets": [
-        "REPLACE_ME_PRIVATE_SUBNET_ONE",
-        "REPLACE_ME_PRIVATE_SUBNET_TWO"
+        "subnet-06e4d39050f9b65b2",
+        "subnet-07f5dbcd3faf2c81a"
       ]
     }
   },
@@ -24,7 +24,7 @@
     {
       "containerName": "SampleApps-Service",
       "containerPort": 8080,
-      "targetGroupArn": "REPLACE_ME_NLB_TARGET_GROUP_ARN"
+      "targetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:152263948408:targetgroup/SampleApps-TargetGroup/d9cdcdaa7e27a341"
     }
   ]
 }

@@ -51,7 +51,7 @@
           <div class="col-md-4 border border-warning" ng-repeat="app in apps">
               <br>
               <p align="center">
-                <strong> {{ap.name}}</strong>
+                <strong> {{app.name}}</strong>
               </p>
               <p>
                 <br>
@@ -69,7 +69,7 @@
   </body>
   <script>
 
-    var appsApiEndpoint = 'REPLACE_ME'; // example: 'http://sampl-publi-abcd12345-01234567890123.elb.us-east-1.amazonaws.com'
+    var appsApiEndpoint = 'http://apps-nlb-f82dd60f2bdca367.elb.us-east-1.amazonaws.com'; // example: 'http://sampl-publi-abcd12345-01234567890123.elb.us-east-1.amazonaws.com'
 
     var app = angular.module('appsApp', []);
 

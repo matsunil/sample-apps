@@ -1,7 +1,7 @@
 {
   "pipeline": {
       "name": "SampleAppsServiceCICDPipeline",
-      "roleArn": "REPLACE_ME_CODEPIPELINE_ROLE_ARN",
+      "roleArn": "arn:aws:iam::152263948408:role/SampleAppsServiceCodePipelineServiceRole",
       "stages": [
         {
           "name": "Source",
@@ -85,7 +85,7 @@
       ],
       "artifactStore": {
         "type": "S3",
-        "location": "REPLACE_ME_ARTIFACTS_BUCKET_NAME"
+        "location": "matsunil-sample-apps-artifacts"
       }
   }
 }
